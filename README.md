@@ -46,6 +46,8 @@ cd anyproxy
 cp .env.example .env
 ```
 
+Note: for RWTH students there is a seperate [.env.example.rwth](.env.example.rwth) which contains defaults for the RWTH vpn
+
 3. Build and start using Docker Compose:
 
 ```bash
@@ -69,7 +71,6 @@ docker run -d \
   --env-file .env \
   anyproxy
 ```
-
 
 ## Configuration
 
