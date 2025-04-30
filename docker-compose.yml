@@ -1,6 +1,7 @@
 services:
   anyproxy:
     container_name: anyproxy
+    image: ghcr.io/the-codeboy/anyproxy:master
     build: .
     cap_add:
     - NET_ADMIN

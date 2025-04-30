@@ -12,18 +12,46 @@ A proxy for Cisco AnyConnect VPNs running in a Docker container. This project co
 ## Prerequisites
 
 - Docker
-- Docker Compose
+- Docker Compose (optional, for local building)
 - Cisco AnyConnect VPN credentials
 
-## Configuration
+## Quick Start
 
-Copy the example environment file and adjust the values:
+Using the pre-built image from GitHub Container Registry:
 
+```bash
+docker run -d \
+  --name anyproxy \
+  --cap-add=NET_ADMIN \
+  --device=/dev/net/tun \
+  -p 8888:8888 \
+  -e VPN_USER=your-username \
+  -e VPN_PASS=your-password \
+  -e VPN_SERVER=vpn.example.com \
+  ghcr.io/the-codeboy/anyproxy:master
+```
+
+## Building Locally
+
+1. Clone this repository:
+```bash
+git clone https://github.com/the-codeboy/anyproxy.git
+cd anyproxy
+```
+
+2. Copy the example environment file and adjust the values:
 ```bash
 cp .env.example .env
 ```
 
-Configure the following environment variables in `.env`:
+3. Build and start using Docker Compose:
+```bash
+docker compose up -d
+```
+
+## Configuration
+
+Configure the following environment variables:
 
 - `VPN_USER`: Username for VPN authentication
 - `VPN_PASS`: Password for VPN authentication
@@ -33,18 +61,12 @@ Configure the following environment variables in `.env`:
 
 ## Usage
 
-1. Build and start the container:
+The proxy will be available at `localhost:8888`
 
-```bash
-docker compose up -d
-```
-
-2. The proxy will be available at `localhost:8888`
-3. Configure your applications to use the proxy:
-
-   - Host: localhost
-   - Port: 8888
-   - Protocol: HTTP/HTTPS
+Configure your applications to use the proxy:
+- Host: localhost
+- Port: 8888
+- Protocol: HTTP/HTTPS
 
 ## Troubleshooting
 
