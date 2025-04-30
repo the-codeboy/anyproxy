@@ -1,0 +1,11 @@
+services:
+  anyproxy:
+    container_name: anyproxy
+    build: .
+    cap_add:
+    - NET_ADMIN
+    env_file: .env
+    ports:
+      - 8888:8888 # the port where the proxy is running
+    devices:
+      - /dev/net/tun:/dev/net/tun
