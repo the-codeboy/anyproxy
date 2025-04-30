@@ -12,7 +12,7 @@ A proxy for Cisco AnyConnect VPNs running in a Docker container. This project co
 ## Prerequisites
 
 - Docker
-- Docker Compose (optional, for local building)
+- Docker Compose (optional)
 - Cisco AnyConnect VPN credentials
 
 ## Quick Start
@@ -34,20 +34,42 @@ docker run -d \
 ## Building Locally
 
 1. Clone this repository:
+
 ```bash
 git clone https://github.com/the-codeboy/anyproxy.git
 cd anyproxy
 ```
 
 2. Copy the example environment file and adjust the values:
+
 ```bash
 cp .env.example .env
 ```
 
 3. Build and start using Docker Compose:
+
 ```bash
 docker compose up -d
 ```
+
+Alternatively you can build without Docker Compose:
+
+```bash
+docker build -t anyproxy .
+```
+
+Then run the container:
+
+```bash
+docker run -d \
+  --name anyproxy \
+  --cap-add=NET_ADMIN \
+  --device=/dev/net/tun \
+  -p 8888:8888 \
+  --env-file .env \
+  anyproxy
+```
+
 
 ## Configuration
 
@@ -64,6 +86,7 @@ Configure the following environment variables:
 The proxy will be available at `localhost:8888`
 
 Configure your applications to use the proxy:
+
 - Host: localhost
 - Port: 8888
 - Protocol: HTTP/HTTPS
