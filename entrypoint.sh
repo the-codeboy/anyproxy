@@ -14,6 +14,7 @@ tinyproxy &
 
 printf '%s\n' "$VPN_PASS" | exec openconnect \
     --useragent=AnyConnect \
+    --no-external-auth
     --user="$VPN_USER" \
     --passwd-on-stdin \
     ${VPN_GROUP:+--authgroup="$VPN_GROUP"} \
